@@ -39,6 +39,28 @@ function AllNotes() {
     navigation(`/edit-note/${_id}`);
   };
 
+  // Delete note by id
+  const handelRemove = async (_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/notes/delete/${_id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response) {
+        console.log('Error in fetching remove by id');
+      }
+
+      // Update UI instantly without reload
+      setUserData((pre) => pre.filter((note) => note._id !== _id));
+
+    } catch (error) {
+      console.log('Error in removing note:', error);
+    }
+  };
+
 
 
   return (
@@ -73,6 +95,7 @@ function AllNotes() {
                 </button>
 
                 <button
+                  onClick={() => handelRemove(note._id)}
                   className="p-2 rounded-md text-neutral-100 border border-neutral-500 hover:bg-neutral-800 hover:border-neutral-300 transition"
                 >
                   Remove
