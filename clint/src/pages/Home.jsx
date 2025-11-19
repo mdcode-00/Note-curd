@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmptyNote from '../components/EmptyNote.jsx';
+import { fetchNotes, deleteNote } from '../api.js'; // import your api helper
 
 function AllNotes() {
-
   const navigation = useNavigate();
 
   // State to store fetched notes
   const [userData, setUserData] = useState([]);
 
   // Fetch notes from backend API
-  const fetchData = async () => {
+  const loadNotes = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/notes');
-
-      if (!response.ok) {
-        console.log('Failed to fetch notes');
-        return;
-      }
-
-      const data = await response.json();
+      const data = await fetchNotes();
       setUserData(data);
-
     } catch (error) {
       console.log('Error fetching notes:', error);
     }
@@ -29,7 +21,7 @@ function AllNotes() {
 
   // Load notes on component mount
   useEffect(() => {
-    fetchData();
+    loadNotes();
   }, []);
 
   // Navigate to edit page with note id
@@ -38,23 +30,11 @@ function AllNotes() {
   };
 
   // Delete a note by ID
-  const handelRemove = async (_id) => {
+  const handleRemove = async (_id) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/notes/delete/${_id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        console.log('Error deleting note');
-        return;
-      }
-
+      await deleteNote(_id);
       // Update UI without reload
       setUserData(prev => prev.filter(note => note._id !== _id));
-
     } catch (error) {
       console.log('Error removing note:', error);
     }
@@ -97,7 +77,7 @@ function AllNotes() {
                 </button>
 
                 <button
-                  onClick={() => handelRemove(note._id)}
+                  onClick={() => handleRemove(note._id)}
                   className="p-2 rounded-md text-neutral-100 border border-neutral-500 hover:bg-neutral-800 hover:border-neutral-300 transition"
                 >
                   Remove
