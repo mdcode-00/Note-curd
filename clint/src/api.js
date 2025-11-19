@@ -8,7 +8,7 @@ export async function fetchNotes() {
 }
 
 export async function createNote(payload) {
-  const res = await fetch(`${API_BASE}/notes`, {
+  const res = await fetch(`${API_BASE}/notes/create`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
