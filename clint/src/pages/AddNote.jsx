@@ -1,9 +1,7 @@
-import { useRef, useState } from 'react'
+import { useRef, useState } from 'react';
+import { createNote } from '../api'; // ✅ import from api.js
 
 function AddNote({ onClose }) {
-
-  // API endpoint for creating a new note
-  const API = 'http://localhost:3000/api/notes/create';
 
   // Local state for title + content inputs
   const [data, setData] = useState({
@@ -12,23 +10,14 @@ function AddNote({ onClose }) {
   });
 
   // Submit handler for adding a new note
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Basic validation (both fields required)
-      if (!data.title || !data.content) {
-        return;
-      }
+      if (!data.title || !data.content) return;
 
-      // Send POST request to backend API
-      fetch(API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      // Call API helper
+      await createNote(data);
 
       console.log('Note added successfully', data);
 
@@ -43,7 +32,6 @@ function AddNote({ onClose }) {
   // Ref to detect clicks outside modal
   const modelRef = useRef();
 
-  // Close modal if clicked outside the card
   const closeModel = (e) => {
     if (e.target === modelRef.current) {
       onClose();
@@ -51,7 +39,7 @@ function AddNote({ onClose }) {
   };
 
   return (
-    <div 
+    <div
       onClick={closeModel}
       ref={modelRef}
       className='fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center'
@@ -67,7 +55,7 @@ function AddNote({ onClose }) {
 
           {/* Add Note Form */}
           <form onSubmit={handleOnSubmit}>
-            <input 
+            <input
               type="text"
               placeholder='Title'
               className='border border-black rounded-lg w-full p-2 mt-4 font-bold text-slate-900'
@@ -75,16 +63,15 @@ function AddNote({ onClose }) {
               onChange={(e) => setData({ ...data, title: e.target.value })}
             />
 
-            <textarea 
+            <textarea
               placeholder='Content'
               rows={10}
               className='border border-black rounded-lg w-full p-2 mt-4 text-slate-900 font-semibold'
               onChange={(e) => setData({ ...data, content: e.target.value })}
             />
 
-            {/* Submit Button */}
-            <button 
-              className='rounded-md text-neutral-100 border border-neutral-500 hover:bg-violet-800 hover:border-neutral-300 transition w-full mt-5 p-2'
+            <button
+              className='rounded-md text-neutral-100 border border-neutral-500 hover:bg-violet-800 hover:border-neutral-300 transition w-full mt-5 p-2 cursor-pointer'
             >
               Add Note
             </button>
