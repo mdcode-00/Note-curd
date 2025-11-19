@@ -1,11 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "server/api/index.js", "use": "@vercel/node" },
-    { "src": "clint/package.json", "use": "@vercel/static-build" }
-  ],
+  "framework": null,
+  "buildCommand": null,
+  "devCommand": null,
   "routes": [
-    { "src": "/api/(.*)", "dest": "/server/api/index.js" },
-    { "src": "/(.*)", "dest": "/clint/$1" }
+    {
+      "src": "/api/(.*)",
+      "dest": "server/api/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "clint/dist/$1"
+    }
   ]
 }
