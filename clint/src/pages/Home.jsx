@@ -36,7 +36,7 @@ function AllNotes() {
 
   // Navigate to edit page with note id
   const handleEdit = (_id) => {
-    navigation(`/update-todo/${_id}`);
+    navigation(`/edit-note/${_id}`);
   };
 
 
