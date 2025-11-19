@@ -1,6 +1,6 @@
-
-
-const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
 
 export async function fetchNotes() {
   const res = await fetch(`${API_BASE}/notes`);
@@ -8,7 +8,7 @@ export async function fetchNotes() {
 }
 
 export async function createNote(payload) {
-  const res = await fetch(`${API_BASE}/notes/create`, {
+  const res = await fetch(`${API_BASE}/notes`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
