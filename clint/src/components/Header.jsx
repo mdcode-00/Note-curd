@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import AddNote from '../pages/AddNote';
 
 
 function Header() {
 
+ const [showModel , setShowModel] = useState(false);
 
   return (
      <div className=" flex items-center bg-neutral-950 border-b border-neutral-800 p-4 space-x-4 h-[90px]">
@@ -15,6 +17,7 @@ border border-neutral-500 hover:bg-neutral-800
 hover:border-neutral-300 transition" onClick={() => setShowModel(true)}>
 Create note 
 </button>
+ { showModel && <AddNote onClose={() => setShowModel(false)}/>}
   </div>
  </div>
   )
