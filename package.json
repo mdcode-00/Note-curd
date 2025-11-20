@@ -2,12 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/api/index.js",
+  "main": "server/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/index.js",
-    "start": "node src/api/index.js",
-    "vercel-start": "vercel dev"
+    "dev": "nodemon server/src/index.js",
+    "start": "node server/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +17,6 @@
     "express": "^5.1.0",
     "mongodb": "^7.0.0",
     "mongoose": "^8.19.3",
-    "nodemon": "^3.1.10",
-    "serverless-http": "^4.0.0"
+    "nodemon": "^3.1.10"
   }
 }
