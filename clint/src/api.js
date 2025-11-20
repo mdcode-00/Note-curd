@@ -8,7 +8,7 @@ export async function fetchNotes() {
 }
 
 export async function createNote(payload) {
-  const res = await fetch(`${API_BASE}/notes`, {
+  const res = await fetch(`${API_BASE}/notes/create`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -17,7 +17,7 @@ export async function createNote(payload) {
 }
 
 export async function updateNote(id, payload) {
-  const res = await fetch(`${API_BASE}/notes/${id}`, {
+  const res = await fetch(`${API_BASE}/notes/update${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -26,7 +26,7 @@ export async function updateNote(id, payload) {
 }
 
 export async function deleteNote(id) {
-  const res = await fetch(`${API_BASE}/notes/${id}`, {
+  const res = await fetch(`${API_BASE}/notes/delete${id}`, {
     method: 'DELETE',
   });
   return res.json();
