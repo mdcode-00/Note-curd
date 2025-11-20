@@ -1,6 +1,4 @@
-const API_BASE =
-  import.meta.env.VITE_API_URL ||
-  (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
+const API_BASE = 'https://note-curd.vercel.app/api'
 
 export async function fetchNotes() {
   const res = await fetch(`${API_BASE}/notes`);
@@ -17,7 +15,7 @@ export async function createNote(payload) {
 }
 
 export async function updateNote(id, payload) {
-  const res = await fetch(`${API_BASE}/notes/update${id}`, {
+  const res = await fetch(`${API_BASE}/notes/update/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -26,7 +24,7 @@ export async function updateNote(id, payload) {
 }
 
 export async function deleteNote(id) {
-  const res = await fetch(`${API_BASE}/notes/delete${id}`, {
+  const res = await fetch(`${API_BASE}/notes/delete/${id}`, {
     method: 'DELETE',
   });
   return res.json();
