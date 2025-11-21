@@ -15,7 +15,7 @@ function EditNote() {
   // Fetch single note
   const fetchDataById = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/notes/note/${_id}`);
+      const res = await fetch(`https://note-curd.vercel.app/api/notes/note/${_id}`);
       const data = await res.json();
 
       setUserData({
