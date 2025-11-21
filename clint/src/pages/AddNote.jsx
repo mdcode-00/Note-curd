@@ -47,7 +47,7 @@ function AddNote({ onClose }) {
       <div className="mt-10 flex flex-col gap-4">
 
         {/* Close modal button */}
-        <button className='place-self-end text-xl rounded-full p-2 bg-red-600 text-white' onClick={onClose}>X</button>
+        <button className='place-self-end text-xl' onClick={onClose}>X</button>
 
         {/* Main card */}
         <div className="py-10 bg-neutral-950 rounded-xl px-10 shadow-lg flex flex-col gap-5 items-centermx-4">
