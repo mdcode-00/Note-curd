@@ -22,7 +22,7 @@ function AllNotes() {
   // Load notes on component mount
   useEffect(() => {
     loadNotes();
-  }, []);
+  }, [loadNotes]);
 
   // Navigate to edit page with note id
   const handleEdit = (_id) => {
